@@ -11,19 +11,19 @@ const pool = new pg.Pool({
 
 const createUser = async (nome_completo, data_nascimento, email, senha, username) => {
     const result = await pool.query(
-      'INSERT INTO usuarios (nome_completo, data_nascimento, email, senha, username) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      'INSERT INTO alunos (nome_completo, data_nascimento, email, senha, username) VALUES ($1, $2, $3, $4, $5) RETURNING id',
       [nome_completo, data_nascimento, email, senha, username]
     );
     return result.rows[0].id;
   };
   
   const getUserByEmail = async (email) => {
-    const result = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+    const result = await pool.query('SELECT * FROM alunos WHERE email = $1', [email]);
     return result.rows[0];
   };
   
   const updateUserPassword = async (email, senha) => {
-    await pool.query('UPDATE usuarios SET senha = $1 WHERE email = $2', [senha, email]);
+    await pool.query('UPDATE alunos SET senha = $1 WHERE email = $2', [senha, email]);
   };
   
   module.exports = {
