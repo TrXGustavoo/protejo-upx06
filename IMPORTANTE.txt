@@ -1,6 +1,6 @@
 Atenção:
 
-Ao baixarem o projeto, abram o cmd na raíz do projeto (na pasta JovemAprendiz) e executem o comando "npm install", para 
+Ao baixarem o projeto, abram o cmd na raíz do projeto (na pasta Front) e executem o comando "npm install", para 
 instalar as bibliotecas do projeto (node_modules)
 
 Para executar o projeto basta digitar "ng serve" no cmd

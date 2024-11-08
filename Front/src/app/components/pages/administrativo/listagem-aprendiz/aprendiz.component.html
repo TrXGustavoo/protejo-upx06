@@ -1,0 +1,82 @@
+<div>
+  <tr>
+    <td width="25%" style="text-align: left;">
+      <img src="assets/img/logo.png" alt="votacao" style="width: 15%;">
+    </td>
+  </tr>
+</div>
+<div class="card mb-4">
+  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent">
+    <h1 class="m-0">Lista de aprendizes</h1>
+    <div class="button-container">
+      <button class="btn btn-primary rounded d-flex align-items-center btn-add" (click)="cadastrar()">
+        <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
+        <span class="d-none d-md-block">Adicionar aprendiz</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 150px;">Ações</th>
+              <th>Status</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>E-mail</th>
+            </tr>
+            <tr>
+              <th>
+                <!-- Filtro de Ações não precisa aqui, pois já é feito nas linhas de dados -->
+              </th>
+              <th>
+                <!-- Filtro de Status -->
+                <select class="form-control filter" [(ngModel)]="filter.status" (change)="applyFilters()">
+                  <option value="">Selecione...</option>
+                  <option value="Ativo">ATIVO</option>
+                  <option value="Inativo">INATIVO</option>
+                </select>
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar Nome" [(ngModel)]="filter.nome" (input)="applyFilters()">
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar Sobrenome" [(ngModel)]="filter.sobrenome" (input)="applyFilters()">
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar E-mail" [(ngModel)]="filter.email" (input)="applyFilters()">
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- Iterando sobre cada aprendiz -->
+            <tr *ngFor="let aprendiz of filteredAprendiz">
+              <td>
+                <!-- Botões de Ações para cada aprendiz -->
+                <button class="editar" title="Editar">
+                  <i class="fas fa-pencil-alt"></i> Editar
+                </button>
+                <button class="excluir" title="Excluir" (click)="excluirAprendiz(aprendiz)">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </td>
+              <td>{{ aprendiz.status }}</td>
+              <td>{{ aprendiz.nome }}</td>
+              <td>{{ aprendiz.sobrenome }}</td>
+              <td>{{ aprendiz.email }}</td>
+            </tr>
+
+            <!-- Mensagem caso não haja registros -->
+            <tr *ngIf="filteredAprendiz.length === 0">
+              <td colspan="5" class="text-center">Não há registros</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

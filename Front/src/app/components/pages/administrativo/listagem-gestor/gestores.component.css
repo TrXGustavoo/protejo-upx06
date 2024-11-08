@@ -1,0 +1,146 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.button-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.btn-add {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+  .btn-add:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  .table th {
+    background-color: white;
+    font-weight: bold;
+  }
+
+  .table td {
+    background-color: #fff;
+  }
+
+.table-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+
+  .table-icon:hover {
+    color: #ff9600;
+  }
+
+.filter {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 70%;
+}
+
+/* Estilo para o botão Editar (verde) */
+.editar {
+  width: 40%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+  .editar:hover {
+    background-color: #218838; /* Tom mais escuro de verde */
+    transform: translateY(-2px);
+  }
+
+  .editar:focus {
+    outline: none; /* Remove o contorno de foco */
+  }
+
+.excluir {
+  margin-left: 5px;
+  width: 43%;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+  .excluir:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+  }
+
+  .excluir:focus {
+    outline: none;
+  }
+
+
+@media (max-width: 768px) {
+  .btn-add span {
+    display: none;
+  }
+
+  .table-icon {
+    padding: 5px;
+  }
+
+  .table th, .table td {
+    padding: 4px;
+  }
+}

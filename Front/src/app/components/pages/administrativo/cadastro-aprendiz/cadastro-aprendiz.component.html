@@ -1,0 +1,52 @@
+<div class="col-xl-12 col-lg-12">
+  <div class="d-flex align-items-center mb-3">
+    <img src="assets/img/logo.png" alt="votacao" style="width: 15%;" class="mr-2">
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header cadastro py-3 d-flex flex-row align-items-center justify-content-between bg-transparent">
+      <h1 class="m-0">Cadastro de aprendiz</h1>
+    </div>
+
+    <div class="mb-3">
+      <div class="card-body form-card">
+        <h3 class="m-0">Preencha os campos abaixo com as informações do novo estagiário:</h3>
+        <br />
+        <form class="mb-4">
+          <div class="form-row d-flex justify-content-between">
+            <div class="form-group col-lg-3 col-md-6">
+              <label for="status" obrigatorio>Status</label>
+              <select id="status" class="form-control mb-15" required>
+                <option value="">Selecione...</option>
+                <option value="true">Ativo</option>
+                <option value="false">Inativo</option>
+              </select>
+            </div>
+
+            <div class="form-group col-lg-3 col-md-6">
+              <label for="nome" obrigatorio>Nome</label>
+              <input type="text" id="nome" class="form-control" placeholder="Digite o nome" maxlength="50" required>
+            </div>
+
+            <div class="form-group col-lg-3 col-md-6">
+              <label for="sobrenome" obrigatorio>Sobrenome</label>
+              <input type="text" id="sobrenome" class="form-control" placeholder="Digite o sobrenome" maxlength="200" required>
+            </div>
+
+            <div class="form-group col-lg-3 col-md-6">
+              <label for="email" obrigatorio>E-mail</label>
+              <input type="email" id="email" class="form-control" placeholder="Digite o email" maxlength="200" required>
+            </div>
+          </div>
+          <br />
+          <div class="form-button-bottom" style="display: flex; justify-content: flex-end; margin-top: auto;">
+            <button class="btn btn-outline-primary rounded mr-2" type="button" (click)="cancelar()" style="margin-right:30px;">
+              Cancelar
+            </button>
+            <button class="btn btn-primary rounded" type="submit" style="margin-right:80px;">Cadastrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

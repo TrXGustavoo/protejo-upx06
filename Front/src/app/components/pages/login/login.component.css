@@ -1,0 +1,126 @@
+$branco: #f2f4f8;
+$escuro: #3b3b3b;
+
+.label, strong {
+  font-size: 16px !important;
+  white-space: nowrap;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: 5px;
+  text-align: center;
+}
+
+img {
+  width: 35%;
+}
+
+#relative {
+  position: relative;
+  background-color: #f2f2f2;
+}
+
+.btn-login {
+  background-color: #007bff;
+}
+
+#logo {
+  margin: 0 auto;
+  padding-left: 25%;
+}
+
+#desc {
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  transform: translate(0, -50%);
+}
+
+  #desc h3 {
+    text-transform: initial !important;
+    font-weight: 400;
+    color: #fff;
+    margin: 0;
+  }
+
+  #desc p {
+    margin: 0;
+    background-color: #0d1267;
+    border-radius: .25rem;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    text-transform: initial;
+  }
+
+  #desc span {
+    font-weight: 100 !important;
+  }
+
+.b {
+  width: 35%;
+}
+
+.e {
+  width: 65%;
+}
+
+#esqueciSenha {
+  float: right !important;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+#login {
+  padding: 20px;
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+  #login #bloco {
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+#painel-central {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+  footer #logo-tafner {
+    height: 20px;
+    width: auto;
+  }
+
+  footer a {
+    color: #fff;
+    padding-right: 10px;
+    font-size: 12px;
+  }
+
+.linkSenha {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
