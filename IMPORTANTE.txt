@@ -1,0 +1,15 @@
+Atenção:
+
+Ao baixarem o projeto, abram o cmd na raíz do projeto (na pasta JovemAprendiz) e executem o comando "npm install", para 
+instalar as bibliotecas do projeto (node_modules)
+
+Para executar o projeto basta digitar "ng serve" no cmd
+
+Guia de rotas:
+
+http://localhost:4200/login -> tela de login administrativo
+http://localhost:4200/aprendiz -> listagem de aprendiz cadastrados
+http://localhost:4200/cadastro-aprendiz -> tela de cadastro aprendiz
+
+http://localhost:4200/gestores ->listagem de gestores cadastrados
+http://localhost:4200/cadastro-gestor -> tela de cadastro de gestor
