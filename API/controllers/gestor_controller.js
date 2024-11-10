@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../models/professorModel'); // Alterado para professorModel
+const pool = require('../models/gestorModel'); // Alterado para professorModel
 
 const registrar = async (req, res) => {
   const { nome_completo, data_nascimento, email, senha, username, disciplina } = req.body; // Adicionado disciplina

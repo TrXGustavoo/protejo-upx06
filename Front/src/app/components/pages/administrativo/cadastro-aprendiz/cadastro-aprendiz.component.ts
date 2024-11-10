@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Estagiario, EstagiarioService } from '../../../../services/api.service';
 
 @Component({
   selector: 'app-cadastro-aprendiz',
@@ -7,9 +8,34 @@ import { Router } from '@angular/router';
   styleUrl: './cadastro-aprendiz.component.css'
 })
 export class CadastroAprendizComponent {
-  constructor(private router: Router) { }
+  // constructor(private router: Router) { }
 
-  cancelar() {
-    this.router.navigate(['/aprendiz']);
+  estagiario: Estagiario = {
+    nome_completo: '',
+    data_nascimento: '',
+    email: '',
+    senha: '',
+    username: '',
+    ativo: true
+  };
+
+  constructor(private estagiarioService: EstagiarioService) { } 
+
+  registrar() {
+    this.estagiarioService.registrar(this.estagiario)
+      .subscribe(
+        response => {
+          console.log('Estagiario registrado com sucesso!', response);
+          
+        },
+        error => {
+          console.error('Erro ao registrar Estagiario:', error);
+          
+        }
+      );
   }
+  // cancelar() {
+  //   this.router.navigate(['/aprendiz']);
+  //   return 
+  // }
 }

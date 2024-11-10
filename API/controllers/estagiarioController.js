@@ -1,20 +1,20 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../models/usuarioModel');
+const pool = require('../models/estagiarioModel');
 
 const registrar = async (req, res) => {
-  const { nome_completo, data_nascimento, email, senha, username } = req.body;
+  const { nome_completo, data_nascimento, email, senha, username, ativo } = req.body;
 
   try {
     // Hash da senha
     const hashedPassword = await bcrypt.hash(senha, 10);
 
     // Inserir o usuário no banco de dados (usando a função do model)
-    const userId = await pool.createUser(nome_completo, data_nascimento, email, hashedPassword, username);
+    const userId = await pool.createEstagiario(nome_completo, data_nascimento, email, hashedPassword, username, ativo);
 
     const token = jwt.sign({ userId }, 'EFB3FCcl');
 
-    res.status(201).json({ message: 'Usuário registrado com sucesso!', token }); // Enviar o token na resposta
+    res.status(201).json({ message: 'Estagiario registrado com sucesso!', token }); // Enviar o token na resposta
   } catch (error) {
     console.error(error);
     if (error.code === '23505') {

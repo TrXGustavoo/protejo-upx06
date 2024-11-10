@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../models/usuarioModel'); 
+const pool = require('../models/estagiarioModel'); 
 const nodemailer = require('nodemailer');
 
 
