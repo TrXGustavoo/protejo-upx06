@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const professorController = require('../controllers/gestor_controller'); 
+const gestorController = require('../controllers/gestor_controller'); 
 
-router.post('/registrar', professorController.registrar); 
+router.post('/registrar', gestorController.registrar); 
 
 module.exports = router;

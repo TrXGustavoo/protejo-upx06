@@ -13,7 +13,6 @@ export interface Gestor {
 }
 
 
-
 @Injectable({
   providedIn: 'root'
 })
