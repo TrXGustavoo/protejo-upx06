@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Estagiario, EstagiarioService } from '../../../../services/api.service';
 import { Router } from '@angular/router';
 
 interface Filter {
-  nome: string;
-  sobrenome: string;
+  nome_completo: string;
+  username: string;
   email: string;
-  status: string;
+  ativo?: boolean; // Ativo agora é opcional, para filtrar por todos, ativos ou inativos
 }
 
 @Component({
@@ -14,54 +15,63 @@ interface Filter {
   styleUrls: ['./aprendiz.component.css']
 })
 export class AprendizComponent implements OnInit {
-  constructor(private router: Router) { }
-
-  filter: Filter = {
-    nome: '',
-    sobrenome: '',
+  estagiarios: Estagiario[] = [];
+  filteredEstagiarios: Estagiario[] = []; // Corrigido o nome da variável
+  filter: Filter = { // Inicializa o filtro com valores vazios
+    nome_completo: '',
+    username: '',
     email: '',
-    status: ''
+    ativo: undefined // Inicialmente, não filtra por ativo/inativo
   };
 
-  // Aqui eu simulei um dataset, precisamos fazer a busca no Bd
-  aprendiz = [
-    { nome: 'João', sobrenome: 'Silva', email: 'joao@gmail.com', status: 'Ativo' },
-    { nome: 'Maria', sobrenome: 'Santos', email: 'maria@gmail.com', status: 'Inativo' },
-    { nome: 'Pedro', sobrenome: 'Oliveira', email: 'pedro@gmail.com', status: 'Ativo' },
-    { nome: 'Ana', sobrenome: 'Pereira', email: 'ana@gmail.com', status: 'Ativo' },
-    { nome: 'Lucas', sobrenome: 'Costa', email: 'lucas@gmail.com', status: 'Inativo' }
-  ];
+  constructor(private router: Router, private estagiarioService: EstagiarioService) { }
 
-  filteredAprendiz = this.aprendiz;
+  ngOnInit() {
+    this.buscarEstagiario();
+  }
 
-  ngOnInit(): void {
-    this.applyFilters(); 
+  buscarEstagiario() {
+    this.estagiarioService.listar_estagiario().subscribe(
+      (estagiarios) => {
+        this.estagiarios = estagiarios;
+        this.filteredEstagiarios = estagiarios; // Inicializa a lista filtrada com todos os estagiários
+      },
+      (error) => {
+        console.error('Erro ao buscar estagiários:', error);
+        // Tratar o erro, ex: exibir uma mensagem para o usuário
+      }
+    );
   }
 
   //filtragem
   applyFilters(): void {
-    this.filteredAprendiz = this.aprendiz.filter(aprendiz => {
+    this.filteredEstagiarios = this.estagiarios.filter(estagiario => {
       return (
-        (this.filter.nome ? aprendiz.nome.includes(this.filter.nome) : true) &&
-        (this.filter.sobrenome ? aprendiz.sobrenome.includes(this.filter.sobrenome) : true) &&
-        (this.filter.email ? aprendiz.email.includes(this.filter.email) : true) &&
-        (this.filter.status ? aprendiz.status === this.filter.status : true)
+        (this.filter.nome_completo ? estagiario.nome_completo.includes(this.filter.nome_completo) : true) &&
+        (this.filter.username ? estagiario.username.includes(this.filter.username) : true) &&
+        (this.filter.email ? estagiario.email.includes(this.filter.email) : true) &&
+        (this.filter.ativo === undefined ? true : estagiario.ativo === this.filter.ativo) // Filtra por ativo/inativo se definido
       );
     });
   }
 
-  editarAluno(aprendiz: any) {
-    // Implementar lógica para editar aprendiz
-  }
-  excluirAprendiz(aprendiz: any) {
-    const index = this.aprendiz.indexOf(aprendiz);
-    if (index > -1) {
-      this.aprendiz.splice(index, 1); 
-      this.applyFilters(); 
-      console.log('Aluno excluído:', aprendiz);
+  excluirEstagiario(estagiario: Estagiario) {
+    if (confirm(`Tem certeza que deseja excluir o estagiário ${estagiario.nome_completo}?`)) {
+      this.estagiarioService.excluirEstagiario(estagiario.id)
+        .subscribe(
+          () => {
+            // Remover o estagiário da lista
+            this.estagiarios = this.estagiarios.filter(e => e.id !== estagiario.id);
+            this.applyFilters(); // Reaplicar os filtros para atualizar a lista filtrada
+            console.log('Estagiário excluído com sucesso!');
+          },
+          (error) => {
+            console.error('Erro ao excluir estagiário:', error);
+            // Exibir uma mensagem de erro para o usuário
+          }
+        );
     }
   }
-
   cadastrar() {
     this.router.navigate(['/cadastro-aprendiz']);
   }

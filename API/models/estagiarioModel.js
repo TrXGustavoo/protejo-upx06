@@ -29,6 +29,8 @@ const createEstagiario = async (nome_completo, data_nascimento, email, senha, us
   const updateUserPassword = async (email, senha) => {
     await pool.query('UPDATE estagiario SET senha = $1 WHERE email = $2', [senha, email]);
   };
+
+
   
   module.exports = {
     createEstagiario,

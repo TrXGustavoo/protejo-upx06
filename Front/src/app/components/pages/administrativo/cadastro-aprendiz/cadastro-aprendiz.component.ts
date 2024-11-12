@@ -11,6 +11,7 @@ export class CadastroAprendizComponent {
   // constructor(private router: Router) { }
 
   estagiario: Estagiario = {
+    id: 0,
     nome_completo: '',
     data_nascimento: '',
     email: '',
