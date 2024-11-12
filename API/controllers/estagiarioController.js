@@ -1,6 +1,8 @@
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../models/estagiarioModel');
+const pool1 = require('../models/estagiarioModel');
+const { pool } = require('../models/estagiarioModel');
 
 const registrar = async (req, res) => {
   const { nome_completo, data_nascimento, email, senha, username, ativo } = req.body;
@@ -10,7 +12,7 @@ const registrar = async (req, res) => {
     const hashedPassword = await bcrypt.hash(senha, 10);
 
     // Inserir o usuário no banco de dados (usando a função do model)
-    const userId = await pool.createEstagiario(nome_completo, data_nascimento, email, hashedPassword, username, ativo);
+    const userId = await pool1.createEstagiario(nome_completo, data_nascimento, email, hashedPassword, username, ativo);
 
     const token = jwt.sign({ userId }, 'EFB3FCcl');
 
@@ -32,4 +34,36 @@ const registrar = async (req, res) => {
   }
 };
 
-module.exports = { registrar };
+const listar_estagiario = async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM estagiario'); 
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Erro ao buscar estagiarios:', error);
+    res.status(500).json({ message: 'Erro ao buscar estagiarios' });
+  }
+};
+
+
+const excluirEstagiario = async (req, res) => {
+  const estagiarioId = parseInt(req.params.id, 10);
+
+  try {
+    const result = await pool.query('DELETE FROM estagiario WHERE id = $1', [estagiarioId]);
+
+    if (result.rowCount === 1) {
+      res.status(200).json({ message: 'Estagiário excluído com sucesso!' });
+    } else {
+      res.status(404).json({ message: 'Estagiário não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao excluir estagiário:', error);
+    res.status(500).json({ message: 'Erro ao excluir estagiário.' });
+  }
+};
+
+module.exports = { 
+  registrar,
+  listar_estagiario,
+  excluirEstagiario,
+ };
