@@ -13,6 +13,7 @@
         <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
         <span class="d-none d-md-block">Adicionar aprendiz</span>
       </button>
+      
     </div>
   </div>
 
@@ -24,54 +25,49 @@
             <tr>
               <th style="width: 150px;">Ações</th>
               <th>Status</th>
-              <th>Nome</th>
-              <th>Sobrenome</th>
+              <th>Nome Completo</th>
+              <th>Username</th>
               <th>E-mail</th>
             </tr>
             <tr>
               <th>
-                <!-- Filtro de Ações não precisa aqui, pois já é feito nas linhas de dados -->
-              </th>
+                </th>
               <th>
-                <!-- Filtro de Status -->
-                <select class="form-control filter" [(ngModel)]="filter.status" (change)="applyFilters()">
-                  <option value="">Selecione...</option>
-                  <option value="Ativo">ATIVO</option>
-                  <option value="Inativo">INATIVO</option>
+                <select class="form-control filter" [(ngModel)]="filter.ativo" (change)="applyFilters()">
+                  <option [ngValue]="undefined">Selecione...</option>
+                  <option [ngValue]="true">ATIVO</option>
+                  <option [ngValue]="false">INATIVO</option>
                 </select>
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Nome" [(ngModel)]="filter.nome" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Nome" [(ngModel)]="filter.nome_completo" name="nome_completo" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Sobrenome" [(ngModel)]="filter.sobrenome" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Username" [(ngModel)]="filter.username" name="username" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar E-mail" [(ngModel)]="filter.email" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar E-mail" [(ngModel)]="filter.email" name="email" (input)="applyFilters()">
               </th>
             </tr>
           </thead>
 
           <tbody>
-            <!-- Iterando sobre cada aprendiz -->
-            <tr *ngFor="let aprendiz of filteredAprendiz">
+            <tr *ngFor="let estagiario of filteredEstagiarios">
               <td>
-                <!-- Botões de Ações para cada aprendiz -->
                 <button class="editar" title="Editar">
                   <i class="fas fa-pencil-alt"></i> Editar
                 </button>
-                <button class="excluir" title="Excluir" (click)="excluirAprendiz(aprendiz)">
+                <button class="excluir" title="Excluir" (click)="excluirEstagiario(estagiario)">
                   <i class="fas fa-trash"></i> Excluir
                 </button>
               </td>
-              <td>{{ aprendiz.status }}</td>
-              <td>{{ aprendiz.nome }}</td>
-              <td>{{ aprendiz.sobrenome }}</td>
-              <td>{{ aprendiz.email }}</td>
+              <td>{{ estagiario.ativo ? 'ATIVO' : 'INATIVO' }}</td>
+              <td>{{ estagiario.nome_completo }}</td>
+              <td>{{ estagiario.username }}</td>
+              <td>{{ estagiario.email }}</td>
             </tr>
 
-            <!-- Mensagem caso não haja registros -->
-            <tr *ngIf="filteredAprendiz.length === 0">
+            <tr *ngIf="filteredEstagiarios.length === 0">
               <td colspan="5" class="text-center">Não há registros</td>
             </tr>
           </tbody>
