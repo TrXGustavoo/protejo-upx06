@@ -62,8 +62,48 @@ const excluirEstagiario = async (req, res) => {
   }
 };
 
+
+const editarEstagiario = async (req, res) => {
+  const estagiarioId = req.params.id;
+  const { nome_completo, data_nascimento, email, senha, username, ativo } = req.body;
+
+  try {
+    const result = await pool.query(
+      'UPDATE estagiario SET nome_completo = $1, data_nascimento = $2, email = $3, senha = $4, username = $5, ativo = $6 WHERE id = $7',
+      [nome_completo, data_nascimento, email, senha, username, ativo, estagiarioId]
+    );
+
+    if (result.rowCount === 1) {
+      res.status(200).json({ message: 'Estagiário atualizado com sucesso!' });
+    } else {
+      res.status(404).json({ message: 'Estagiário não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar estagiário:', error);
+    res.status(500).json({ message: 'Erro ao atualizar estagiário.' });
+  }
+};
+
+const buscarEstagiarioPorId = async (req, res) => {
+  const estagiarioId = parseInt(req.params.id, 10);
+
+  try {
+    const result = await pool.query('SELECT * FROM estagiario WHERE id = $1', [estagiarioId]);
+    if (result.rows.length === 1) {
+      res.status(200).json(result.rows[0]);
+    } else {
+      res.status(404).json({ message: 'Estagiário não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao buscar estagiário:', error);
+    res.status(500).json({ message: 'Erro ao buscar estagiário.' });
+  }
+};
+
 module.exports = { 
   registrar,
   listar_estagiario,
   excluirEstagiario,
+  editarEstagiario,
+  buscarEstagiarioPorId,
  };

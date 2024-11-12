@@ -54,7 +54,7 @@
           <tbody>
             <tr *ngFor="let estagiario of filteredEstagiarios">
               <td>
-                <button class="editar" title="Editar">
+                <button class="editar" title="Editar" [routerLink]="['/editar-aprendiz', estagiario.id]"> 
                   <i class="fas fa-pencil-alt"></i> Editar
                 </button>
                 <button class="excluir" title="Excluir" (click)="excluirEstagiario(estagiario)">

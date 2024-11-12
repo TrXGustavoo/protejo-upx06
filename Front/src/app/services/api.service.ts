@@ -19,6 +19,8 @@ export class EstagiarioService {
   private registrarUrl = 'http://localhost:3000/estagiarios/registrar';
   private listarUrl = 'http://localhost:3000/estagiarios/listar';
   private deletarUrl = 'http://localhost:3000/estagiarios/:id';
+  private buscaUrl = 'http://localhost:3000/estagiarios/buscar';
+  private editarUrl = 'http://localhost:3000/estagiarios/editar';
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +34,16 @@ export class EstagiarioService {
     const url = `${this.deletarUrl.replace(':id', id.toString())}`; 
     console.log("URL de exclusão:", url);  // Adicione este console.log para verificar a URL
     return this.http.delete(url);
+  }
+
+  editarEstagiario(estagiario: Estagiario): Observable<any> {
+    const url = `${this.editarUrl}/${estagiario.id}`; // Ajuste a interpolação da URL
+    return this.http.put(url, estagiario);
+  }
+
+  buscarEstagiarioPorId(id: number): Observable<Estagiario> {
+    const url = `${this.buscaUrl}/${id}`;
+    return this.http.get<Estagiario>(url);
   }
   
 }

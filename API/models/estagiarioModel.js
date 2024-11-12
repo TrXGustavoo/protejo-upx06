@@ -31,7 +31,6 @@ const createEstagiario = async (nome_completo, data_nascimento, email, senha, us
   };
 
 
-  
   module.exports = {
     createEstagiario,
     getUserByEmail,
