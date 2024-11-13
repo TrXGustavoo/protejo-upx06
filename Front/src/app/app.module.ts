@@ -14,6 +14,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatIconModule } from '@angular/material/icon';
 import { CadastroAprendizComponent } from './components/pages/administrativo/cadastro-aprendiz/cadastro-aprendiz.component';
 import { CadastroGestorComponent } from './components/pages/administrativo/cadastro-gestor/cadastro-gestor.component';
+import { EditarAprendizComponent } from './components/pages/administrativo/editar-aprendiz/editar-aprendiz.component';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { CadastroGestorComponent } from './components/pages/administrativo/cadas
     SidebarComponent,
     AdminComponent,
     CadastroAprendizComponent,
-    CadastroGestorComponent
+    CadastroGestorComponent,
+    EditarAprendizComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { CadastroGestorComponent } from './components/pages/administrativo/cadas
     HttpClientModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

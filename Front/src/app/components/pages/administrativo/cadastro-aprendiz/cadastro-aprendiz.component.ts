@@ -20,7 +20,11 @@ export class CadastroAprendizComponent {
     ativo: true
   };
 
-  constructor(private estagiarioService: EstagiarioService) { } 
+  constructor(
+    private router: Router, 
+    private estagiarioService: EstagiarioService
+  ) { }
+
 
   registrar() {
     this.estagiarioService.registrar(this.estagiario)
@@ -35,8 +39,8 @@ export class CadastroAprendizComponent {
         }
       );
   }
-  // cancelar() {
-  //   this.router.navigate(['/aprendiz']);
-  //   return 
-  // }
+  cancelar() {
+    this.router.navigate(['/aprendiz']);
+    return 
+  }
 }

@@ -1,5 +1,4 @@
 <head>
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -20,24 +19,24 @@
         <br />
         <span style="margin-left:10px;">Digite suas credenciais para acessar o sistema.</span>
 
-        <form class="mb-4 mt-4 col-md-12" autocomplete="off">
+        <form class="mb-4 mt-4 col-md-12" autocomplete="off" (ngSubmit)="login()"> 
           <div class="form-group">
             <label for="email" class="label-default">E-mail</label>
-            <input type="text" autocomplete="off" name="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+            <input type="text" autocomplete="off" name="email" class="form-control" id="email" placeholder="Digite seu e-mail" required [(ngModel)]="usuario.email"> 
           </div>
 
           <div class="form-group">
             <div class="d-flex justify-content-between w-100">
               <label for="Senha" class="label-default">Senha</label>
             </div>
-            <input type="password" autocomplete="off" name="Senha" class="form-control" id="Senha" placeholder="Digite sua senha" required>
+            <input type="password" autocomplete="off" name="Senha" class="form-control" id="Senha" placeholder="Digite sua senha" required [(ngModel)]="usuario.senha"> 
             <div id="esqueciSenha" class="linkSenha">Esqueci a senha</div>
           </div>
 
           <div class="form-group mb-4"></div>
 
           <div class="flex-end">
-            <button class="btn btn-primary btn-block rounded btn-login" type="submit">Entrar</button>
+            <button class="btn btn-primary btn-block rounded btn-login" type="submit">Entrar</button> 
           </div>
         </form>
       </div>
