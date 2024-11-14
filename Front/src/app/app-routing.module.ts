@@ -6,6 +6,8 @@ import { AprendizComponent } from './components/pages/administrativo/listagem-ap
 import { CadastroAprendizComponent } from './components/pages/administrativo/cadastro-aprendiz/cadastro-aprendiz.component';
 import { CadastroGestorComponent } from './components/pages/administrativo/cadastro-gestor/cadastro-gestor.component';
 import { EditarAprendizComponent } from './components/pages/administrativo/editar-aprendiz/editar-aprendiz.component';
+import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.component';
+import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'gestores', component: GestoresComponent },
   { path: 'cadastro-aprendiz', component: CadastroAprendizComponent },
   { path: 'cadastro-gestor', component: CadastroGestorComponent },
-  { path: 'editar-aprendiz/:id', component: EditarAprendizComponent }
+  { path: 'editar-aprendiz/:id', component: EditarAprendizComponent },
+  { path: 'perfil-aprendiz', component: PerfilComponent },
+  { path: 'cadastro-atividade', component: CadastroAtividadeComponent }
 ];
 
 @NgModule({

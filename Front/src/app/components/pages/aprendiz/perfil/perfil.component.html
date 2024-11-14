@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div style="width: 15%; text-align: left;">
+    <img src="assets/img/logo.png" alt="votacao" style="width: 100%;">
+  </div>
+  <div class="profile-dropdown">
+    <button class="profile-button">Perfil Teste</button>
+    <div class="dropdown-content">
+      <a href="#">Sair</a>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent">
+    <h1 class="m-0">Lista de Atividades</h1>
+    <div class="button-container">
+      <button class="btn btn-primary rounded d-flex align-items-center btn-add">
+        <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
+        <span class="d-none d-md-block" (click)="cadastroAtividade()">Adicionar Atividade</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 150px;">Ações</th>
+              <th>Status</th>
+              <th>Nome da Atividade</th>
+              <th>Gestor</th>
+              <th>Feedback</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>
+                <select class="form-control filter" [(ngModel)]="filter.envio" (change)="applyFilters()">
+                  <option [ngValue]="undefined">Selecione...</option>
+                  <option [ngValue]="true">ENVIADO</option>
+                  <option [ngValue]="false">PENDENTE</option>
+                </select>
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar Atividade" [(ngModel)]="filter.nome_atividade" name="nome_atividade" (input)="applyFilters()">
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar Gestor" [(ngModel)]="filter.gestor" name="gestor" (input)="applyFilters()">
+              </th>
+              <th>
+                <input class="form-control filter" placeholder="Filtrar Feedback" [(ngModel)]="filter.feedback" name="feedback" (input)="applyFilters()">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let atividade of filteredAtividades">
+              <td>
+                <button class="excluir" title="Excluir" (click)="excluirAtividade(atividade)">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </td>
+              <td>{{ atividade.envio ? 'ENVIADO' : 'PENDENTE' }}</td>
+              <td>{{ atividade.nome_atividade }}</td>
+              <td>{{ atividade.gestor }}</td>
+              <td>{{ atividade.feedback }}</td>
+            </tr>
+            <tr *ngIf="filteredAtividades.length === 0">
+              <td colspan="5" class="text-center">Não há registros</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,11 @@
+# Ignorar a pasta node_modules
 node_modules/
+
+# Ignorar arquivos e pastas do Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Ignorar arquivos do sistema operacional (ex: arquivos de thumbnail no Windows)
+Thumbs.db
+.DS_Store

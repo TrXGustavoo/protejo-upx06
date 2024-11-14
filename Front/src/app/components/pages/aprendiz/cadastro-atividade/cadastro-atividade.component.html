@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div style="width: 15%; text-align: left;">
+    <img src="assets/img/logo.png" alt="votacao" style="width: 100%;">
+  </div>
+  <div class="profile-dropdown">
+    <button class="profile-button">Perfil Teste</button>
+    <div class="dropdown-content">
+      <a href="#">Sair</a>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent">
+    <h1 class="m-0">Cadastro de Atividade</h1>
+  </div>
+
+  <div class="card-body">
+    <form class="mb-4">
+      <p class="highlight-text">Para cadastrar uma atividade no sistema, siga as etapas abaixo:</p>
+      <ul>
+        <li class="highlight-text">Preencha os campos abaixo</li>
+        <li class="highlight-text">Escreva a descrição da atividade</li>
+        <li class="highlight-text">Importe o arquivo de relatório</li>
+        <li class="highlight-text">Finalize clicando em "Cadastrar Atividade"</li>
+      </ul>
+
+      <div class="form-row d-flex justify-content-between" style="margin-top:45px;">
+        <div class="form-group col-md-4">
+          <label for="nomeAtividade">Nome da Atividade</label>
+          <input type="text" id="nomeAtividade" class="form-control" placeholder="Digite o nome da atividade" required>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="dataConclusao">Data de Conclusão</label>
+          <input type="date" id="dataConclusao" class="form-control" required>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="gestorResponsavel">Gestor Responsável</label>
+          <input type="text" id="gestorResponsavel" class="form-control" placeholder="Digite o nome do gestor responsável" required>
+        </div>
+      </div>
+
+      <br />
+      <div class="d-flex align-items-center">
+        <!-- Textarea -->
+        <div class="form-group mr-3" style="flex-grow: 1;">
+          <label for="descritivo">Descritivo da Atividade</label>
+          <textarea id="descritivo" class="form-control descritivo" rows="5" placeholder="Descreva a atividade"></textarea>
+        </div>
+        <!-- Imagem clicável que chama o método de importação -->
+        <img src="assets/img/Importar.jpg" alt="Imagem"
+             style="margin-top: 20px; width: 300px; height: 245px; margin-right: 122px;"
+             (click)="importarArquivo()">
+
+        <!-- Input file oculto -->
+        <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)">
+
+      </div>
+      <br />
+      <br />
+
+      <div class="form-group d-flex justify-content-end">
+        <button class="btn btn-outline-primary rounded mr-2" type="button" (click)="cancelar()" style="margin-right:30px;">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" style="margin-right: 108px;">Cadastrar Atividade</button>
+      </div>
+
+    </form>
+  </div>
+</div>

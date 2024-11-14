@@ -8,7 +8,6 @@ import { Gestor, GestorService } from '../../../../services/gestor.service';
   styleUrl: './cadastro-gestor.component.css'
 })
 export class CadastroGestorComponent {
-  // constructor(private router: Router) { }
 
   gestor: Gestor = {
     nome_completo: '',
@@ -19,7 +18,7 @@ export class CadastroGestorComponent {
     empresa: '',
   };
 
-  constructor(private gestorService: GestorService) { } 
+  constructor(private gestorService: GestorService, private router: Router) { } 
 
   registrar() {
     this.gestorService.registrar(this.gestor)
@@ -35,7 +34,7 @@ export class CadastroGestorComponent {
       );
   }
 
-  // cancelar() {
-  //   this.router.navigate(['/gestores']);
-  // }
+   cancelar() {
+     this.router.navigate(['/gestores']);
+   }
 }

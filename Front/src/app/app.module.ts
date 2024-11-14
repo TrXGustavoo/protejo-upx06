@@ -16,6 +16,8 @@ import { CadastroAprendizComponent } from './components/pages/administrativo/cad
 import { CadastroGestorComponent } from './components/pages/administrativo/cadastro-gestor/cadastro-gestor.component';
 import { EditarAprendizComponent } from './components/pages/administrativo/editar-aprendiz/editar-aprendiz.component';
 import { AuthService } from './services/auth.service';
+import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.component';
+import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { AuthService } from './services/auth.service';
     AdminComponent,
     CadastroAprendizComponent,
     CadastroGestorComponent,
-    EditarAprendizComponent
+    EditarAprendizComponent,
+    PerfilComponent,
+    CadastroAtividadeComponent
   ],
   imports: [
     BrowserModule,
