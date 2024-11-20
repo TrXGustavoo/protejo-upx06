@@ -88,3 +88,28 @@ table {
   font-size: 14px;
   width: 70%;
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 16px;
+  background-image: url('/assets/img/wallpaper.jpg');
+  background-size: cover;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0px !important;
+  height:92px;
+}
+.button-container {
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 74px;
+}

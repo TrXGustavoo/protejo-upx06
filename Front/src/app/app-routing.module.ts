@@ -8,19 +8,29 @@ import { CadastroGestorComponent } from './components/pages/administrativo/cadas
 import { EditarAprendizComponent } from './components/pages/administrativo/editar-aprendiz/editar-aprendiz.component';
 import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.component';
 import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SharedComponent } from './components/shared/shared.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'aprendiz', component: AprendizComponent },
-  { path: 'gestores', component: GestoresComponent },
-  { path: 'cadastro-aprendiz', component: CadastroAprendizComponent },
-  { path: 'cadastro-gestor', component: CadastroGestorComponent },
-  { path: 'editar-aprendiz/:id', component: EditarAprendizComponent },
-  { path: 'perfil-aprendiz', component: PerfilComponent },
-  { path: 'cadastro-atividade', component: CadastroAtividadeComponent }
+  {
+    path: '',
+    component: SharedComponent,
+    children: [
+      { path: 'aprendiz', component: AprendizComponent },
+      { path: 'gestores', component: GestoresComponent },
+      { path: 'cadastro-aprendiz', component: CadastroAprendizComponent },
+      { path: 'cadastro-gestor', component: CadastroGestorComponent },
+      { path: 'editar-aprendiz', component: EditarAprendizComponent }
+    ]
+  },
+  { path: 'perfil-aprendiz', component: PerfilComponent }, 
+  { path: 'cadastro-atividade', component: CadastroAtividadeComponent } 
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

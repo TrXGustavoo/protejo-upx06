@@ -18,6 +18,7 @@ import { EditarAprendizComponent } from './components/pages/administrativo/edita
 import { AuthService } from './services/auth.service';
 import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.component';
 import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
+import { SharedComponent } from './components/shared/shared.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro
     CadastroGestorComponent,
     EditarAprendizComponent,
     PerfilComponent,
-    CadastroAtividadeComponent
+    CadastroAtividadeComponent,
+    SharedComponent
   ],
   imports: [
     BrowserModule,

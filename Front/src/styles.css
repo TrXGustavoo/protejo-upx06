@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#content-wrapper {
+  margin-left: 250px; /* Largura padrão da sidebar */
+  transition: margin-left 0.3s ease;
+}
+
+#accordionSidebar.toggled + #content-wrapper {
+  margin-left: 70px; /* Largura da sidebar minimizada */
+}

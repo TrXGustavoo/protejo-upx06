@@ -1,0 +1,25 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-menu sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+  <div style="background-color:white;">
+    <tr>
+      <td width="100%" style="text-align: left;">
+        <img src="assets/img/logo.png" alt="votacao" style="width: 80%;">
+      </td>
+    </tr>
+  </div>
+  <!-- Link para "Aprendiz" -->
+  <li class="nav-item" style="margin-top:60px;">
+    <a class="nav-link" title="Aprendiz" [routerLink]="['/aprendiz']">
+      <i class="fas fa-user-graduate"></i>
+      <span><strong>Aprendiz</strong></span>
+    </a>
+  </li>
+
+  <!-- Link para "Gestores" -->
+  <li class="nav-item">
+    <a class="nav-link" title="Gestores" [routerLink]="['/gestores']">
+      <i class="fas fa-user-tie"></i>
+      <span><strong>Gestores</strong></span>
+    </a>
+  </li>
+</ul>

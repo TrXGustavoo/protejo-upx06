@@ -1,21 +1,29 @@
-<div>
+<!--<div>
   <tr>
     <td width="25%" style="text-align: left;">
       <img src="assets/img/logo.png" alt="votacao" style="width: 15%;">
     </td>
   </tr>
-</div>
-<div class="card mb-4">
-  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent">
-    <h1 class="m-0">Lista de gestores</h1>
-    <div class="button-container">
-      <button class="btn btn-primary rounded d-flex align-items-center btn-add" (click)="cadastrar()">
-        <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
-        <span class="d-none d-md-block">Adicionar gestor</span>
-      </button>
+</div>-->
+<div class="container">
+  <div class="profile-dropdown">
+    <button class="profile-button">Perfil Teste</button>
+    <div class="dropdown-content">
+      <a href="#">Sair</a>
     </div>
   </div>
+</div>
 
+<div class="card mb-4">
+  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent" style=" height: 92px;">
+    <h1 class="m-0">Lista de gestores</h1>
+  </div>
+  <div class="button-container">
+    <button class="btn btn-primary rounded d-flex align-items-center btn-add" (click)="cadastrar()">
+      <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
+      <span class="d-none d-md-block">Adicionar gestor</span>
+    </button>
+  </div>
   <div class="mb-3">
     <div class="card-body">
       <div class="table-responsive">

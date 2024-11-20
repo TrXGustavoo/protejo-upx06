@@ -5,9 +5,10 @@
     "\\src\\app",
     "\\src\\app\\components",
     "\\src\\app\\components\\pages",
+    "\\src\\app\\services",
     "\\src\\assets",
     "\\src\\assets\\img"
   ],
-  "SelectedNode": "\\src\\app\\components",
+  "SelectedNode": "\\src\\app\\components\\sidebar",
   "PreviewInSolutionExplorer": false
 }
