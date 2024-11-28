@@ -4,11 +4,16 @@
   </div>
   <div class="container">
     <div class="profile-dropdown">
-      <button class="profile-button">Perfil Teste</button>
+      <button class="profile-button">
+        <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i> Perfil Teste
+      </button>
+
+      <!-- Dropdown Menu -->
       <div class="dropdown-content">
-        <a href="#">Sair</a>
+        <a href="#">  <i class="bi bi-box-arrow-right" style="margin-left:10px;margin-right:10px;"></i>Sair</a>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -18,14 +23,13 @@
   </div>
   <div class="button-container">
     <button class="btn btn-primary rounded d-flex align-items-center btn-add">
-      <i class="fas fa-plus d-block mr-0 mr-md-2"></i>
       <span class="d-none d-md-block" (click)="cadastroAtividade()">Adicionar Atividade</span>
     </button>
   </div>
   <div class="mb-3">
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th style="width: 150px;">Ações</th>
@@ -37,20 +41,20 @@
             <tr>
               <th></th>
               <th>
-                <select class="form-control filter" [(ngModel)]="filter.envio" (change)="applyFilters()">
+                <select class="form-control filter" style="margin-left:35px;"  [(ngModel)]="filter.envio" (change)="applyFilters()">
                   <option [ngValue]="undefined">Selecione...</option>
                   <option [ngValue]="true">ENVIADO</option>
                   <option [ngValue]="false">PENDENTE</option>
                 </select>
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Atividade" [(ngModel)]="filter.nome_atividade" name="nome_atividade" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Atividade" style="margin-left:45px;"  [(ngModel)]="filter.nome_atividade" name="nome_atividade" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Gestor" [(ngModel)]="filter.gestor" name="gestor" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Gestor" style="margin-left:45px;"  [(ngModel)]="filter.gestor" name="gestor" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Feedback" [(ngModel)]="filter.feedback" name="feedback" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Feedback" style="margin-left:45px;"  [(ngModel)]="filter.feedback" name="feedback" (input)="applyFilters()">
               </th>
             </tr>
           </thead>

@@ -22,6 +22,7 @@ body {
   background-size: cover;
   padding: 16px;
   border-bottom: 1px solid #ddd;
+  height: 92px;
 }
 
 .card-body {
@@ -59,7 +60,6 @@ body {
 .btn {
   padding: 10px 20px;
   font-size: 14px;
-  font-weight: bold;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s;
 }

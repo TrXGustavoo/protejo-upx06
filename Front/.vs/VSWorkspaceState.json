@@ -5,10 +5,13 @@
     "\\src\\app",
     "\\src\\app\\components",
     "\\src\\app\\components\\pages",
-    "\\src\\app\\services",
+    "\\src\\app\\components\\pages\\administrativo",
+    "\\src\\app\\components\\pages\\administrativo\\listagem-aprendiz",
+    "\\src\\app\\components\\pages\\aprendiz",
+    "\\src\\app\\components\\pages\\aprendiz\\perfil",
     "\\src\\assets",
     "\\src\\assets\\img"
   ],
-  "SelectedNode": "\\src\\app\\components\\sidebar",
+  "SelectedNode": "\\src\\app\\components\\pages\\administrativo\\listagem-aprendiz\\aprendiz.component.css",
   "PreviewInSolutionExplorer": false
 }

@@ -11,24 +11,31 @@
 
   .sidebar .nav-item {
     transition: background-color 0.3s ease;
-    margin-left: 50px; /* Ajuste conforme necessário */
-    display: inline-block !important; /* Permite que o background cubra apenas o conteúdo do texto */
-    width: auto; /* Ajusta o item conforme o tamanho do conteúdo */
+    display: inline-block !important; 
+    width: auto; 
   }
 
     .sidebar .nav-item:hover {
-      color: #0056b3; /* Cor de fundo ao passar o mouse */
+      color: #0056b3; 
       cursor: pointer;
     }
 
   .sidebar .nav-link {
-    display: inline-flex; /* Flexbox para alinhar o ícone e o texto */
+    display: inline-flex; 
     align-items: center;
     justify-content: center;
-    padding: 15px 15px; /* Ajuste o padding conforme necessário */
-    width: auto; /* Garante que o link ocupe apenas o necessário */
+    padding: 15px 15px; 
+    width: auto;
   }
 
 .nav-item .nav-link span {
   color: white;
 }
+.nav-item:hover {
+  background-color: #272C36;
+}
+
+  .nav-item:hover .nav-link {
+    color: white; 
+  }
+

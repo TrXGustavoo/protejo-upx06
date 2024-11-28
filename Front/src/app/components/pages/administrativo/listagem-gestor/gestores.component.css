@@ -35,7 +35,6 @@ body {
   border: none;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.2s;
@@ -61,6 +60,8 @@ body {
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 14px;
+    text-align: center;
+
   }
 
   .table th {
@@ -70,6 +71,7 @@ body {
 
   .table td {
     background-color: #fff;
+    border: 1px solid #ddd;
   }
 
 .table-icon {
@@ -89,12 +91,12 @@ body {
   border-radius: 4px;
   padding: 4px 8px;
   font-size: 14px;
-  width: 70%;
+  width: 80%;
 }
 
 /* Estilo para o botão Editar (verde) */
 .editar {
-  width: 40%;
+  width: 45%;
   background-color: #28a745;
   color: white;
   border: none;
@@ -116,7 +118,7 @@ body {
 
 .excluir {
   margin-left: 5px;
-  width: 43%;
+  width: 50%;
   background-color: #dc3545;
   color: white;
   border: none;
@@ -204,4 +206,12 @@ body {
   .table th, .table td {
     padding: 4px;
   }
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #e0e0e0; /* Cinza claro */
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #ffffff; /* Branco */
 }

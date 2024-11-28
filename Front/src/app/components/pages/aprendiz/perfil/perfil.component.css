@@ -53,16 +53,19 @@ table {
 
   table th, table td {
     padding: 8px 12px;
-    border: 1px solid #ddd;
-    text-align: left;
+    text-align: center;
   }
 
   table th {
     background-color: #87cefa;
   }
+
+  table td {
+    border: 1px solid #ddd;
+  }
 .excluir {
   margin-left: 5px;
-  width: 43%;
+  width: 50%;
   background-color: #dc3545;
   color: white;
   border: none;
@@ -112,4 +115,11 @@ table {
   justify-content: flex-end;
   align-items: center;
   height: 74px;
+}
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #e0e0e0; /* Cinza claro */
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #ffffff; /* Branco */
 }

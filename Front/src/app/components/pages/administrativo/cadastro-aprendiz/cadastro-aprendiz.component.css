@@ -57,7 +57,6 @@ body {
 .btn {
   padding: 10px 20px;
   font-size: 14px;
-  font-weight: bold;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s;
 }
@@ -133,6 +132,9 @@ body {
       background-color: #f1f1f1;
     }
 
+  .dropdown-content i {
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+  }
 /* Exibe o menu quando o botão de perfil é focado */
 .profile-dropdown:hover .dropdown-content {
   display: block;
