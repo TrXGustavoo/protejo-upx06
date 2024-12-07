@@ -18,17 +18,96 @@ const registrar = async (req, res) => {
     console.error(error);
     if (error.code === '23505') {
       // Erro de violação de restrição UNIQUE (email ou username já existe)
-      if (error.constraint === 'gestores_email_key') { 
+      if (error.constraint === 'gestores_email_key') {
         res.status(400).json({ message: 'Email já cadastrado' });
-      } else if (error.constraint === 'gestores_username_key') { 
+      } else if (error.constraint === 'gestores_username_key') {
         res.status(400).json({ message: 'Username já cadastrado' });
       } else {
         res.status(500).json({ message: 'Erro ao registrar gestor' });
-      }                                             
+      }
     } else {
       res.status(500).json({ message: 'Erro ao registrar gestor' });
     }
   }
 };
+const listarGestores = async (req, res) => {
+  try {
+    const gestores = await pool.getAllGestores();
+    res.status(200).json(gestores);
+  } catch (error) {
+    console.error('Erro ao listar gestores:', error);
+    res.status(500).json({ message: error.message || 'Erro ao listar gestores' });
+  }
+};
 
-module.exports = { registrar };
+const excluirGestor = async (req, res) => {
+  const gestorId = parseInt(req.params.id, 10);
+
+  try {
+    const gestorExcluido = await pool.deleteGestor(gestorId);
+
+    if (gestorExcluido) {
+      res.status(200).json({ message: 'Gestor excluído com sucesso!' });
+    } else {
+      res.status(404).json({ message: 'Gestor não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao excluir gestor:', error);
+    res.status(500).json({ message: error.message || 'Erro ao excluir gestor' });
+  }
+};
+
+const buscarGestorPorId = async (req, res) => {
+  const gestorId = parseInt(req.params.id, 10);
+
+  try {
+    const gestor = await pool.getGestorById(gestorId);
+
+    if (gestor) {
+      res.status(200).json(gestor);
+    } else {
+      res.status(404).json({ message: 'Gestor não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao buscar gestor:', error);
+    res.status(500).json({ message: error.message || 'Erro ao buscar gestor' });
+  }
+};
+
+const editarGestor = async (req, res) => {
+  const gestorId = parseInt(req.params.id, 10);
+  const { nome_completo, data_nascimento, email, senha, username, empresa } = req.body;
+
+  try {
+    // Hash da senha, se necessário
+    const hashedPassword = senha ? await bcrypt.hash(senha, 10) : undefined;
+    const senhaAtualizada = hashedPassword || senha;
+
+    const gestorAtualizado = await pool.updateGestor(
+      gestorId,
+      nome_completo,
+      data_nascimento,
+      email,
+      senhaAtualizada,
+      username,
+      empresa
+    );
+
+    if (gestorAtualizado) {
+      res.status(200).json({ message: 'Gestor atualizado com sucesso!' });
+    } else {
+      res.status(404).json({ message: 'Gestor não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar gestor:', error);
+    res.status(500).json({ message: error.message || 'Erro ao atualizar gestor' });
+  }
+};
+
+module.exports = {
+  registrar,
+  listarGestores,
+  excluirGestor,
+  buscarGestorPorId,
+  editarGestor,
+};

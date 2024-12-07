@@ -6,6 +6,7 @@ import { AprendizComponent } from './components/pages/administrativo/listagem-ap
 import { CadastroAprendizComponent } from './components/pages/administrativo/cadastro-aprendiz/cadastro-aprendiz.component';
 import { CadastroGestorComponent } from './components/pages/administrativo/cadastro-gestor/cadastro-gestor.component';
 import { EditarAprendizComponent } from './components/pages/administrativo/editar-aprendiz/editar-aprendiz.component';
+import { EditarGestorComponent } from './components/pages/administrativo/editar-gestor/editar-gestor.component';
 import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.component';
 import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'gestores', component: GestoresComponent },
       { path: 'cadastro-aprendiz', component: CadastroAprendizComponent },
       { path: 'cadastro-gestor', component: CadastroGestorComponent },
-      { path: 'editar-aprendiz', component: EditarAprendizComponent }
+      { path: 'editar-aprendiz/:id', component: EditarAprendizComponent },
+      { path: 'editar-gestor/:id', component: EditarGestorComponent }
     ]
   },
   { path: 'perfil-aprendiz', component: PerfilComponent }, 

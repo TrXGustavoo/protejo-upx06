@@ -10,6 +10,7 @@ import { Gestor, GestorService } from '../../../../services/gestor.service';
 export class CadastroGestorComponent {
 
   gestor: Gestor = {
+    id: 0,
     nome_completo: '',
     data_nascimento: '',
     email: '',

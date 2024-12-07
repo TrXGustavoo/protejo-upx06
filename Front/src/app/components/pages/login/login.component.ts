@@ -22,7 +22,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login bem-sucedido!', response);
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/aprendiz']);
       },
       (error) => {
         console.error('Erro no login:', error);
