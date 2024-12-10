@@ -9,7 +9,7 @@ router.get('/listar', estagiarioController.listar_estagiario);
 router.delete('/:id', estagiarioController.excluirEstagiario);
 router.put('/:id', verificarAprendiz, estagiarioController.editarEstagiario);
 router.get('/buscar/:id', estagiarioController.buscarEstagiarioPorId);
-router.post('/:id/desvincular', verificarUsuario, estagiarioController.desvincularEstagiario); 
+router.delete('/:id/desvincular', verificarUsuario, estagiarioController.desvincularEstagiario); 
 
 
 module.exports = router;

@@ -33,6 +33,7 @@ const registrar = async (req, res) => {
 const listarGestores = async (req, res) => {
   try {
     const gestores = await pool.getAllGestores();
+    console.log('Gestores:', gestores);
     res.status(200).json(gestores);
   } catch (error) {
     console.error('Erro ao listar gestores:', error);

@@ -87,7 +87,8 @@ const loginEmpresa = async (req, res) => {
     const token = jwt.sign({ empresaId: empresa.id }, 'EFB3FCcl');
     res.status(200).json({ 
       token,
-      tipoUsuario: 'empresa' 
+      tipoUsuario: 'empresa' ,
+      empresaId: empresa.id
     });
   } catch (error) {
     console.error('Erro no login da empresa:', error);
@@ -118,16 +119,18 @@ const cadastrarGestor = async (req, res) => {
 
 
 const atribuirEstagiario = async (req, res) => {
-  const empresaId = req.usuario.empresaId; // ID da empresa logada
-  const { id_estagiario, id_gestor } = req.body;
+  const empresaId = req.body.empresaId;
+  const id_estagiario = Number(req.params.id);
+  const id_gestor = req.body.gestorId;
+
 
   try {
     // Verificar se o gestor pertence à empresa
-    const gestor = await gestorModel.getGestorById(id_gestor);
+    // const gestor = await gestorModel.getGestorById(id_gestor);
 
-    if (!gestor || gestor.empresa_id !== empresaId) {
-      return res.status(400).json({ message: 'Gestor inválido.' });
-    }
+    // if (!gestor || gestor.empresa_id !== empresaId) {
+    //   return res.status(400).json({ message: 'Gestor inválido.' });
+    // }
 
     // Buscar o estagiário
     const estagiario = await estagiarioModel.getEstagiarioById(id_estagiario);
@@ -135,6 +138,7 @@ const atribuirEstagiario = async (req, res) => {
     if (!estagiario) {
       return res.status(400).json({ message: 'Estagiário inválido.' });
     }
+    
 
     // Atribuir o estagiário ao gestor e à empresa
     await pool.query('INSERT INTO estagiario_gestor (estagiario_id, gestor_id) VALUES ($1, $2)', [id_estagiario, id_gestor]);
@@ -148,6 +152,48 @@ const atribuirEstagiario = async (req, res) => {
 };
 
 
+const listarGestoresDaEmpresa = async (req, res) => {
+  const empresaId = req.params.id;
+
+  try {
+    const gestores = await gestorModel.getAllGestoresEmpresa({ empresa_id: empresaId }); // Buscar gestores da empresa
+    res.status(200).json(gestores);
+  } catch (error) {
+    console.error('Erro ao listar gestores da empresa:', error);
+    res.status(500).json({ message: 'Erro ao listar gestores da empresa.' });
+  }
+};
+
+const listarEstagiariosDaEmpresa = async (req, res) => {
+  const empresaId = req.params.id;
+
+  try {
+    const estagiarios = await estagiarioModel.getAllEstagiariosEmpresa({ empresa_id: empresaId }); // Buscar estagiários da empresa
+    res.status(200).json(estagiarios);
+  } catch (error) {
+    console.error('Erro ao listar estagiários da empresa:', error);
+    res.status(500).json({ message: 'Erro ao listar estagiários da empresa.' });
+  }
+};
+
+
+const buscarEmpresaPorId = async (req, res) => {
+  const empresaId = req.params.id;
+
+  try {
+    const empresa = await empresaModel.getEmpresaById(empresaId);
+    if (empresa) {
+      res.status(200).json(empresa);
+    } else {
+      res.status(404).json({ message: 'Empresa não encontrada.' });
+    }
+  } catch (error) {
+    console.error('Erro ao buscar empresa:', error);
+    res.status(500).json({ message: 'Erro ao buscar empresa.' });
+  }
+};
+
+
 module.exports = {
   criarEmpresa,
   listarEmpresas,
@@ -156,4 +202,7 @@ module.exports = {
   loginEmpresa,
   cadastrarGestor,
   atribuirEstagiario,
+  listarEstagiariosDaEmpresa,
+  listarGestoresDaEmpresa,
+  buscarEmpresaPorId
 };

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Estagiario, EstagiarioService } from '../../../../services/api.service';
 import { Router } from '@angular/router';
+import { SharedDataService } from '../../../../services/SharedData.service';
 
 interface Filter {
   nome_completo: string;
-  username: string;
+  curso: string;
   email: string;
-  ativo?: boolean; // Ativo agora é opcional, para filtrar por todos, ativos ou inativos
+  data_nascimento: string;
+  ativo?: boolean;
+  empresa: string;
 }
 
 @Component({
@@ -16,62 +19,116 @@ interface Filter {
 })
 export class AprendizComponent implements OnInit {
   estagiarios: Estagiario[] = [];
-  filteredEstagiarios: Estagiario[] = []; // Corrigido o nome da variável
-  filter: Filter = { // Inicializa o filtro com valores vazios
+  filteredEstagiarios: Estagiario[] = [];
+  filter: Filter = {
     nome_completo: '',
-    username: '',
+    curso: '',
     email: '',
-    ativo: undefined // Inicialmente, não filtra por ativo/inativo
+    data_nascimento: '',
+    ativo: undefined,
+    empresa: ''
   };
 
-  constructor(private router: Router, private estagiarioService: EstagiarioService) { }
+  tipoUsuario: string | null = localStorage.getItem('tipoUsuario');
+  usuarioId: number | null = Number(localStorage.getItem('usuarioId'));
+
+  constructor(
+    private router: Router,
+    private estagiarioService: EstagiarioService,
+    private sharedDataService: SharedDataService
+  ) { }
 
   ngOnInit() {
     this.buscarEstagiario();
+
+    // Escutar a notificação de atualização do SharedDataService
   }
 
   buscarEstagiario() {
-    this.estagiarioService.listar_estagiario().subscribe(
-      (estagiarios) => {
+    this.estagiarioService.listar_estagiario().subscribe({
+      next: (estagiarios) => {
         this.estagiarios = estagiarios;
-        this.filteredEstagiarios = estagiarios; // Inicializa a lista filtrada com todos os estagiários
+        this.filteredEstagiarios = estagiarios;
       },
-      (error) => {
+      error: (error) => {
         console.error('Erro ao buscar estagiários:', error);
-        // Tratar o erro, ex: exibir uma mensagem para o usuário
       }
-    );
+    });
   }
 
-  //filtragem
   applyFilters(): void {
     this.filteredEstagiarios = this.estagiarios.filter(estagiario => {
+      const dataNascimento = estagiario.data_nascimento ? new Date(estagiario.data_nascimento).toLocaleDateString() : '';
+      const filtroDataNascimento = this.filter.data_nascimento ? new Date(this.filter.data_nascimento).toLocaleDateString() : '';
+
       return (
-        (this.filter.nome_completo ? estagiario.nome_completo.includes(this.filter.nome_completo) : true) &&
-        (this.filter.username ? estagiario.username.includes(this.filter.username) : true) &&
-        (this.filter.email ? estagiario.email.includes(this.filter.email) : true) &&
-        (this.filter.ativo === undefined ? true : estagiario.ativo === this.filter.ativo) // Filtra por ativo/inativo se definido
+        (this.filter.nome_completo ? estagiario.nome_completo.toLowerCase().includes(this.filter.nome_completo.toLowerCase()) : true) &&
+        (this.filter.curso ? estagiario.curso.toLowerCase().includes(this.filter.curso.toLowerCase()) : true) &&
+        (this.filter.email ? estagiario.email.toLowerCase().includes(this.filter.email.toLowerCase()) : true) &&
+        (this.filter.data_nascimento === '' || dataNascimento === filtroDataNascimento) &&
+        (this.filter.ativo === undefined || estagiario.ativo === this.filter.ativo) &&
+        (this.filter.empresa === '' || (estagiario.nome_empresa && estagiario.nome_empresa.toLowerCase().includes(this.filter.empresa.toLowerCase())))
       );
     });
   }
 
-  excluirEstagiario(estagiario: Estagiario) {
-    if (confirm(`Tem certeza que deseja excluir o estagiário ${estagiario.nome_completo}?`)) {
-      this.estagiarioService.excluirEstagiario(estagiario.id)
-        .subscribe(
-          () => {
-            // Remover o estagiário da lista
-            this.estagiarios = this.estagiarios.filter(e => e.id !== estagiario.id);
-            this.applyFilters(); // Reaplicar os filtros para atualizar a lista filtrada
-            console.log('Estagiário excluído com sucesso!');
+  desvincularEstagiario(estagiario: Estagiario) {
+    if (confirm(`Tem certeza que deseja desvincular o estagiário ${estagiario.nome_completo}?`)) {
+      this.estagiarioService.desvincularEstagiario(estagiario.id)
+        .subscribe({
+          next: () => {
+
+            this.estagiarioService.buscarEstagiarioPorId(estagiario.id).subscribe({
+              next: (estagiarioAtualizado) => {
+
+
+
+                const index = this.estagiarios.findIndex(e => e.id === estagiario.id);
+                if (index !== -1) {
+                  this.estagiarios[index] = estagiarioAtualizado;
+  
+                  this.applyFilters();
+                }
+              },
+              error: (error) => {
+                console.error('Erro ao buscar estagiário atualizado:', error);
+
+              }
+            });
+
+            console.log('Estagiário desvinculado com sucesso!');
           },
-          (error) => {
-            console.error('Erro ao excluir estagiário:', error);
-            // Exibir uma mensagem de erro para o usuário
+          error: (error) => {
+            console.error('Erro ao desvincular estagiário:', error);
+
           }
-        );
+        });
     }
   }
+
+  vincularEstagiario(estagiario: Estagiario) {
+    const gestorId = Number(localStorage.getItem('userId'));
+    const empresaId = Number(localStorage.getItem('empresaId'));
+
+    if (confirm(`Tem certeza que deseja vincular o estagiário ${estagiario.nome_completo}?`)) {
+      this.estagiarioService.vincularEstagiario(estagiario.id, gestorId, empresaId)
+        .subscribe({
+          next: () => {
+            const index = this.estagiarios.findIndex(e => e.id === estagiario.id);
+            if (index !== -1) {
+              
+              this.applyFilters(); 
+            }
+
+            console.log('Estagiário vinculado com sucesso!');
+          },
+          error: (error) => {
+            console.error('Erro ao vincular estagiário:', error);
+          }
+        });
+    }
+  }
+
   cadastrar() {
     this.router.navigate(['/cadastro-aprendiz']);
   }

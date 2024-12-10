@@ -1,68 +1,45 @@
 <div class="col-xl-12 col-lg-12">
-    <div class="container">
-      <div class="profile-dropdown">
-        <button class="profile-button">
-          <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i> Perfil Teste
-        </button>
-        <div class="dropdown-content">
-          <a href="#"><i class="bi bi-box-arrow-right" style="margin-left:10px;margin-right:10px;"></i>Sair</a>
-        </div>
-      </div>
-    </div>
-  
-    <div class="card mb-4">
-      <div class="card-header cadastro py-3 d-flex flex-row align-items-center justify-content-between bg-transparent">
-        <h1 class="m-0">Editar Gestor</h1> 
-      </div>
-  
-      <div class="mb-3">
-        <div class="card-body form-card">
-          <h3 class="m-0">Edite as informações do gestor:</h3> 
-          <br />
-          <form class="mb-4" (ngSubmit)="editar()"> 
-            <div class="form-row d-flex justify-content-between">
-              <div class="form-group col-lg-3 col-md-6">
-                <label for="nome_completo" obrigatorio>Nome completo</label>
-                <input type="text" id="nome_completo" class="form-control" [(ngModel)]="gestor.nome_completo" name="nome_completo" placeholder="Digite o nome" maxlength="50" required>
-              </div>
-  
-              <div class="form-group col-lg-3 col-md-6">
-                <label for="email" obrigatorio>E-mail</label>
-                <input type="email" id="email" class="form-control" [(ngModel)]="gestor.email" name="email" placeholder="Digite o email" maxlength="200" required>
-              </div>
-  
-              <div class="form-group col-lg-3 col-md-6">
-                <label for="data_nascimento">Data de Nascimento:</label>
-                <input type="date" id="data_nascimento" [(ngModel)]="gestor.data_nascimento" name="data_nascimento" required class="form-control">
-              </div>
-  
-              <div class="form-group col-lg-3 col-md-6">
-                <label for="empresa" obrigatorio>Empresa</label> 
-                <input type="text" id="empresa" class="form-control" [(ngModel)]="gestor.empresa" name="empresa" placeholder="Digite a empresa" maxlength="100" required>
-              </div>
-  
-              <div class="d-flex col-lg-6 col-md-12">
-                <div class="form-group col-6 pr-1">
-                  <label for="senha" obrigatorio>Senha</label>
-                  <input type="password" id="senha" [(ngModel)]="gestor.senha" name="senha" class="form-control" placeholder="Digite a senha" maxlength="200" required>
-                </div>
-  
-                <div class="form-group col-6 pl-1">
-                  <label for="username" obrigatorio>Nome de Usuário</label>
-                  <input type="text" id="username" [(ngModel)]="gestor.username" name="username" class="form-control" placeholder="Digite o nome de usuário" maxlength="100" required>
-                </div>
-              </div>
-            </div>
-  
-            <br />
-            <div class="form-button-bottom" style="display: flex; justify-content: flex-end; margin-top: auto;">
-              <button class="btn btn-outline-primary rounded mr-2" type="button" style="margin-right:30px;" (click)="cancelar()"> 
-                Cancelar
-              </button>
-              <button class="btn btn-primary rounded" type="submit" style="margin-right:80px;">Salvar</button> 
-            </div>
-          </form>
-        </div>
-      </div>
+  <div class="container">
+    <div class="profile-dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person-circle me-2"></i> Perfil Teste
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+      </ul>
     </div>
   </div>
+
+  <div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-transparent">
+      <h1 class="m-0">Editar Gestor</h1>
+    </div>
+
+    <div class="card-body">
+      <h3 class="card-title">Edite as informações do gestor:</h3>
+      <form (ngSubmit)="editar()" class="row g-3 needs-validation" novalidate>
+        <div class="col-md-6">
+          <label for="nome_completo" class="form-label" obrigatorio>Nome completo</label>
+          <input type="text" id="nome_completo" class="form-control" [(ngModel)]="gestor.nome_completo" name="nome_completo" placeholder="Digite o nome" maxlength="50" required>
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label" obrigatorio>E-mail</label>
+          <input type="email" id="email" class="form-control" [(ngModel)]="gestor.email" name="email" placeholder="Digite o email" maxlength="200" required>
+        </div>
+        <div class="col-md-6">
+          <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+          <input type="date" id="data_nascimento" class="form-control" [(ngModel)]="gestor.data_nascimento" name="data_nascimento" required>
+        </div>
+        <div class="col-md-6">
+          <label for="setor" class="form-label" obrigatorio>Setor</label>
+          <input type="text" id="setor" class="form-control" [(ngModel)]="gestor.setor" name="setor" placeholder="Digite o setor" maxlength="100" required>
+        </div>
+
+        <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-outline-primary me-2" type="button" (click)="cancelar()">Cancelar</button>
+          <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

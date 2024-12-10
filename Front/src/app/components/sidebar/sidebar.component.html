@@ -1,4 +1,3 @@
-<!-- Sidebar -->
 <ul class="navbar-nav bg-menu sidebar sidebar-dark accordion toggled" id="accordionSidebar">
   <div style="background-color:white;">
     <tr>
@@ -11,7 +10,29 @@
   <br />
   <br />
   <br />
-  <!-- Link para "Aprendiz" -->
+
+  <li class="nav-item" *ngIf="tipoUsuario === 'estagiario'">
+    <a class="nav-link" title="Perfil" [routerLink]="['/perfil-aprendiz']">
+      <i class="fas fa-user" style="color: white; width: 20px; margin-left: 50px;"></i>
+      <span style="font-size:16px;">Perfil</span>
+    </a>
+  </li>
+
+  <li class="nav-item" *ngIf="tipoUsuario === 'gestor'">
+    <a class="nav-link" title="Perfil" [routerLink]="['/perfil-gestor']">
+      <i class="fas fa-user" style="color: white; width: 20px; margin-left: 50px;"></i>
+      <span style="font-size:16px;">Perfil</span>
+    </a>
+  </li>
+
+  <li class="nav-item" *ngIf="tipoUsuario === 'empresa'">
+    <a class="nav-link" title="Perfil" [routerLink]="['/perfil-empresa', empresaId]">
+      <i class="fas fa-user" style="color: white; width: 20px; margin-left: 50px;"></i>
+      <span style="font-size:16px;">Perfil</span>
+    </a>
+  </li>
+
+
   <li class="nav-item">
     <a class="nav-link" title="Aprendiz" [routerLink]="['/aprendiz']">
       <i class="fas fa-user-graduate" style="color: white; width: 20px; margin-left: 50px;"></i>
@@ -19,11 +40,17 @@
     </a>
   </li>
 
-  <!-- Link para "Gestores" -->
   <li class="nav-item">
     <a class="nav-link" title="Gestores" [routerLink]="['/gestores']">
       <i class="fas fa-user-tie" style="color:white;width:20px;margin-left:50px;"></i>
       <span style="font-size:16px;">Gestores</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" title="Sair" (click)="logout()">
+      <i class="fas fa-sign-out-alt" style="color: white; width: 20px; margin-left: 50px;"></i>
+      <span style="font-size:16px;">Sair</span>
     </a>
   </li>
 </ul>

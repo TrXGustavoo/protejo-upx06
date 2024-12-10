@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Gestor, GestorService } from '../../../../services/gestor.service'; 
+import { Gestor, GestorService } from '../../../../services/gestor.service';
 import { Router } from '@angular/router';
+import { EmpresaService } from '../../../../services/empresa.service'; // Importe o EmpresaService
+
 
 interface Filter {
   nome_completo: string;
-  username: string;
+  setor: string;
   email: string;
-  empresa: string; 
+  empresa_id: number;
+  nome_empresa: string;
 }
 
 @Component({
@@ -19,12 +22,16 @@ export class GestoresComponent implements OnInit {
   filteredGestores: Gestor[] = [];
   filter: Filter = {
     nome_completo: '',
-    username: '',
+    setor: '',
     email: '',
-    empresa: '', 
+    empresa_id: 0,
+    nome_empresa: ''
   };
 
-  constructor(private router: Router, private gestorService: GestorService) { } 
+  constructor(
+    private router: Router,
+    private gestorService: GestorService,
+  ) { }
 
   ngOnInit() {
     this.buscarGestores();
@@ -35,6 +42,7 @@ export class GestoresComponent implements OnInit {
       (gestores) => {
         this.gestores = gestores;
         this.filteredGestores = gestores;
+        console.log('Gestores:', gestores);
       },
       (error) => {
         console.error('Erro ao buscar gestores:', error);
@@ -46,9 +54,9 @@ export class GestoresComponent implements OnInit {
     this.filteredGestores = this.gestores.filter(gestor => {
       return (
         (this.filter.nome_completo ? gestor.nome_completo.includes(this.filter.nome_completo) : true) &&
-        (this.filter.username ? gestor.username.includes(this.filter.username) : true) &&
+        (this.filter.setor ? gestor.setor.includes(this.filter.setor) : true) &&
         (this.filter.email ? gestor.email.includes(this.filter.email) : true) &&
-        (this.filter.empresa ? gestor.empresa.includes(this.filter.empresa) : true) 
+        (this.filter.nome_empresa ? gestor.nome_empresa.includes(this.filter.nome_empresa) : true) 
       );
     });
   }
@@ -59,7 +67,7 @@ export class GestoresComponent implements OnInit {
         .subscribe(
           () => {
             this.gestores = this.gestores.filter(g => g.id !== gestor.id);
-            this.applyFilters(); 
+            this.applyFilters();
             console.log('Gestor excluído com sucesso!');
           },
           (error) => {
@@ -70,6 +78,6 @@ export class GestoresComponent implements OnInit {
   }
 
   cadastrar() {
-    this.router.navigate(['/cadastro-gestor']); 
+    this.router.navigate(['/cadastro-gestor']);
   }
 }

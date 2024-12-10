@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
+import { EstagiarioService } from '../../../../services/api.service'; // Importe o EstagiarioService
+
+
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
 
   // Dados de atividades para demonstração fictício
   atividades = [
@@ -26,10 +30,18 @@ export class PerfilComponent {
   // Lista de atividades filtradas
   filteredAtividades = [...this.atividades];
 
-  constructor(private router: Router) { }
+  estagiario: any; // Variável para armazenar os dados do estagiário
+
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private route: ActivatedRoute, // Injetar o ActivatedRoute
+    private estagiarioService: EstagiarioService // Injetar o EstagiarioService
+  ) { }
 
   ngOnInit(): void {
-    this.applyFilters(); // Aplica os filtros ao inicializar
+    this.buscarEstagiario(); // Buscar os dados do estagiário ao iniciar o componente
+    this.applyFilters();
   }
 
   // Função para aplicar os filtros
@@ -42,6 +54,21 @@ export class PerfilComponent {
         (this.filter.feedback === '' || atividade.feedback.toLowerCase().includes(this.filter.feedback.toLowerCase()))
       );
     });
+  }
+
+  buscarEstagiario() {
+    const id = this.route.snapshot.paramMap.get('id'); // Obter o ID do estagiário da rota
+    if (id) {
+      this.estagiarioService.buscarEstagiarioPorId(+id).subscribe({ // Buscar os dados do estagiário na API
+        next: (estagiario) => {
+          this.estagiario = estagiario;
+        },
+        error: (error) => {
+          console.error('Erro ao buscar estagiário:', error);
+          // Tratar o erro, ex: exibir uma mensagem para o usuário
+        }
+      });
+    }
   }
 
   cadastroAtividade() {
@@ -58,5 +85,11 @@ export class PerfilComponent {
 
     // Reaplica os filtros para atualizar a lista na tela
     this.applyFilters();
+  }
+
+  
+
+  onLogout() {
+    this.authService.logout();
   }
 }

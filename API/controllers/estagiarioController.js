@@ -36,7 +36,11 @@ const registrar = async (req, res) => {
 
 const listar_estagiario = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM estagiario'); 
+    const result = await pool.query(`
+      SELECT e.*, em.nome AS nome_empresa
+      FROM estagiario e
+      LEFT JOIN empresa em ON e.empresa_id = em.id
+    `);
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar estagiarios:', error);
@@ -161,7 +165,7 @@ const desvincularEstagiario = async (req, res) => {
     if (usuario.tipoUsuario === 'empresa' && estagiario.empresa_id !== usuario.empresaId) {
       return res.status(403).json({ message: 'Você não tem permissão para desvincular este estagiário.' });
     } else if (usuario.tipoUsuario === 'gestor') {
-      const estagiariosDoGestor = await gestorModel.getEstagiariosDoGestor(usuario.userId);
+      const estagiariosDoGestor = await gestorModel.getEstagiariosDoGestor(usuario.gestorId);
       const estagiarioVinculado = estagiariosDoGestor.find(e => e.id === estagiarioId);
       if (!estagiarioVinculado) {
         return res.status(403).json({ message: 'Você não tem permissão para desvincular este estagiário.' });
@@ -170,6 +174,7 @@ const desvincularEstagiario = async (req, res) => {
 
     // Desvincular o estagiário da empresa (remove a relação na tabela estagiario_gestor)
     await pool.query('DELETE FROM estagiario_gestor WHERE estagiario_id = $1', [estagiarioId]);
+    await pool.query('UPDATE estagiario SET empresa_id = NULL WHERE id = $1', [estagiarioId]);
 
     res.status(200).json({ message: 'Estagiário desvinculado com sucesso!' });
   } catch (error) {

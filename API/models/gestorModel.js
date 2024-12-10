@@ -52,14 +52,17 @@ const deleteGestor = async (id) => {
 
 const getAllGestores = async () => {
   try {
-    const result = await pool.query('SELECT * FROM gestor');
+    const result = await pool.query(`
+      SELECT g.*, e.nome AS nome_empresa 
+      FROM gestor g
+      JOIN empresa e ON g.empresa_id = e.id
+    `);
     return result.rows;
   } catch (error) {
     console.error('Erro ao buscar gestores:', error);
     throw new Error('Erro ao buscar gestores no banco de dados.');
   }
 };
-
 const getGestorById = async (id) => {
   try {
     const result = await pool.query(`
@@ -93,6 +96,24 @@ const getEstagiariosDoGestor = async (gestorId) => {
 };
 
 
+const getAllGestoresEmpresa = async (where = {}) => {
+  try {
+    let query = 'SELECT * FROM gestor';
+    let values = [];
+    if (Object.keys(where).length > 0) {
+      query += ' WHERE ' + Object.entries(where)
+        .map(([key, value], index) => `${key} = $${index + 1}`)
+        .join(' AND ');
+      values = Object.values(where);
+    }
+    const result = await pool.query(query, values);
+    return result.rows;
+  } catch (error) {
+    console.error('Erro ao buscar gestores:', error);
+    throw new Error('Erro ao buscar gestores no banco de dados.');
+  }
+};
+
 module.exports = {
   createGestor, 
   getGestorByEmail, 
@@ -101,5 +122,6 @@ module.exports = {
   getAllGestores,
   getGestorById,
   getEstagiariosDoGestor,
+  getAllGestoresEmpresa,
   pool,
 };

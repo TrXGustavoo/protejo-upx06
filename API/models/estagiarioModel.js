@@ -41,10 +41,29 @@ const getEstagiarioById = async (id) => {
   }
 };
 
+const getAllEstagiariosEmpresa = async (where = {}) => {
+  try {
+    let query = 'SELECT * FROM estagiario';
+    let values = [];
+    if (Object.keys(where).length > 0) {
+      query += ' WHERE ' + Object.entries(where)
+        .map(([key, value], index) => `${key} = $${index + 1}`)
+        .join(' AND ');
+      values = Object.values(where);
+    }
+    const result = await pool.query(query, values);
+    return result.rows;
+  } catch (error) {
+    console.error('Erro ao buscar estagiários:', error);
+    throw new Error('Erro ao buscar estagiários no banco de dados.');
+  }
+};
+
 module.exports = {
   createEstagiario,
   getUserByEmail,
   updateUserPassword,
   getEstagiarioById,
+  getAllEstagiariosEmpresa,
   pool,
 };

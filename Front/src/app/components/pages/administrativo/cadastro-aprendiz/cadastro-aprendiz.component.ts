@@ -16,8 +16,9 @@ export class CadastroAprendizComponent {
     data_nascimento: '',
     email: '',
     senha: '',
-    username: '',
-    ativo: true
+    curso: '',
+    ativo: true,
+    nome_empresa: null
   };
 
   constructor(

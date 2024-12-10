@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/AuthController');
+const authController = require('../controllers/authController');
 
-router.post('/login/estagiario', authController.loginEstagiario); // Rota para login de estagiário
-router.post('/login/gestor', authController.loginGestor); // Rota para login de gestor
+router.post('/login', authController.login); // Rota única para login
 
 module.exports = router;

@@ -8,9 +8,8 @@ const verificarGestor = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'EFB3FCcl'); // Substitua 'EFB3FCcl' pela sua chave secreta real
+    const decoded = jwt.verify(token, 'EFB3FCcl'); 
 
-    // Verificar se o usuário é um gestor
     if (decoded.gestorId) {
       req.usuario = decoded; 
       next();

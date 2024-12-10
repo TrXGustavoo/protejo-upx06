@@ -15,8 +15,9 @@ export class CadastroGestorComponent {
     data_nascimento: '',
     email: '',
     senha: '',
-    username: '',
-    empresa: '',
+    setor: '',
+    empresa_id: 0,
+    nome_empresa: ''
   };
 
   constructor(private gestorService: GestorService, private router: Router) { } 
@@ -26,10 +27,10 @@ export class CadastroGestorComponent {
       .subscribe(
         response => {
           console.log('Gestor registrado com sucesso!', response);
-          
+          this.router.navigate(['/gestores']);
         },
         error => {
-          console.error('Erro ao registrar Estagiario:', error);
+          console.error('Erro ao registrar Gestor:', error);
           
         }
       );

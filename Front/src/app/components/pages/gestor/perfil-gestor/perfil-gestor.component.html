@@ -1,0 +1,45 @@
+<div class="col-xl-12 col-lg-12">
+  <div class="container">
+    <div class="profile-dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <i class="bi bi-person-circle me-2"></i> Perfil Teste
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-transparent">
+      <h1 class="m-0">Perfil do Gestor</h1>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="card-title">Informações do Gestor:</h3>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Nome:</strong> {{ gestor.nome_completo }}</li>
+            <li class="list-group-item"><strong>E-mail:</strong> {{ gestor.email }}</li>
+            <li class="list-group-item"><strong>Data de Nascimento:</strong> {{ gestor.data_nascimento | date:
+              'dd/MM/yyyy' }}</li>
+            <li class="list-group-item"><strong>Setor:</strong> {{ gestor.setor }}</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3 class="card-title">Estagiários Vinculados:</h3>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let estagiario of estagiarios">
+              {{ estagiario.nome_completo }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-primary" [routerLink]="['/editar-gestor', gestor.id]">Editar Perfil</button>
+      </div>
+    </div>
+  </div>
+</div>

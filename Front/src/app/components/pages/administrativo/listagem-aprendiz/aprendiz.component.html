@@ -1,89 +1,77 @@
-<!--<div>
-  <tr>
-    <td width="25%" style="text-align: left;">
-      <img src="assets/img/logo.png" alt="votacao" style="width: 15%;">
-    </td>
-  </tr>
-</div>-->
 <div class="container">
   <div class="profile-dropdown">
-    <button class="profile-button">
-      <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i> Perfil Teste
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown"
+      aria-expanded="true">
+      <i class="bi bi-person-circle me-2"></i> Perfil Teste
     </button>
-
-    <!-- Dropdown Menu -->
-    <div class="dropdown-content">
-      <a href="#">  <i class="bi bi-box-arrow-right" style="margin-left:10px;margin-right:10px;"></i>Sair</a>
-    </div>
+    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+      <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+    </ul>
   </div>
 </div>
+
 <div class="card mb-4">
-  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent" style="height: 92px;">
+  <div class="card-header py-3 d-flex align-items-center justify-content-between bg-transparent">
     <h1 class="m-0">Lista de aprendizes</h1>
   </div>
-  <div class="button-container">
-    <button class="btn btn-primary rounded d-flex align-items-center btn-add" (click)="cadastrar()">
-      <span class="d-none d-md-block">Adicionar aprendiz</span>
-    </button>
 
-  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-end mb-3">
+      <button *ngIf="tipoUsuario === 'estagiario'" class="btn btn-primary" (click)="cadastrar()">Adicionar
+        aprendiz</button>
+    </div>
 
-  <div class="mb-3">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th style="width: 150px;">Ações</th>
-              <th>Status</th>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>E-mail</th>
-            </tr>
-            <tr>
-              <th>
-              </th>
-              <th>
-                <select class="form-control filter" style="margin-left:20px;" [(ngModel)]="filter.ativo" (change)="applyFilters()">
-                  <option [ngValue]="undefined">Selecione...</option>
-                  <option [ngValue]="true">ATIVO</option>
-                  <option [ngValue]="false">INATIVO</option>
-                </select>
-              </th>
-              <th>
-                <input class="form-control filter" placeholder="Filtrar Nome" style="margin-left:50px;" [(ngModel)]="filter.nome_completo" name="nome_completo" (input)="applyFilters()">
-              </th>
-              <th>
-                <input class="form-control filter" placeholder="Filtrar sobrenome" style="margin-left:50px;" [(ngModel)]="filter.username" name="username" (input)="applyFilters()">
-              </th>
-              <th>
-                <input class="form-control filter" placeholder="Filtrar E-mail" style="margin-left:35px;" [(ngModel)]="filter.email" name="email" (input)="applyFilters()">
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let estagiario of filteredEstagiarios">
-              <td>
-                <button class="editar" title="Editar" [routerLink]="['/editar-aprendiz', estagiario.id]">
-                  <i class="fas fa-pencil-alt"></i> Editar
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Ações</th>
+            <th>Nome Completo</th>
+            <th>E-mail</th>
+            <th>Data de Nascimento</th>
+            <th>Status</th>
+            <th>Curso</th>
+            <th>Empresa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let estagiario of filteredEstagiarios">
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary"
+                  *ngIf="tipoUsuario === 'estagiario' && estagiario.id === usuarioId"
+                  [routerLink]="['/editar-aprendiz', estagiario.id]">
+                  <i class="fas fa-pencil-alt"></i>
                 </button>
-                <button class="excluir" title="Excluir" (click)="excluirEstagiario(estagiario)">
-                  <i class="fas fa-trash"></i> Excluir
-                </button>
-              </td>
-              <td>{{ estagiario.ativo ? 'ATIVO' : 'INATIVO' }}</td>
-              <td>{{ estagiario.nome_completo }}</td>
-              <td>{{ estagiario.username }}</td>
-              <td>{{ estagiario.email }}</td>
-            </tr>
 
-            <tr *ngIf="filteredEstagiarios.length === 0">
-              <td colspan="5" class="text-center">Não há registros</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                <button type="button" class="btn btn-outline-danger"
+                  *ngIf="tipoUsuario === 'empresa' || tipoUsuario === 'gestor'"
+                  (click)="desvincularEstagiario(estagiario)">
+                  <i class="fas fa-unlink"></i>
+                </button>
+
+                <button type="button" class="btn btn-outline-success"
+                  *ngIf="tipoUsuario === 'empresa' || tipoUsuario === 'gestor'"
+                  (click)="vincularEstagiario(estagiario)">
+                  <i class="fas fa-link"></i>
+                </button>
+              </div>
+            </td>
+            <td>
+              <a [routerLink]="['/perfil-aprendiz', estagiario.id]">{{ estagiario.nome_completo }}</a>
+            </td>
+            <td>{{ estagiario.email }}</td>
+            <td>{{ estagiario.data_nascimento | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ estagiario.ativo ? 'ATIVO' : 'INATIVO' }}</td>
+            <td>{{ estagiario.curso }}</td>
+            <td>{{ estagiario.nome_empresa || 'Nenhuma' }}</td>
+          </tr>
+
+          <tr *ngIf="filteredEstagiarios.length === 0">
+            <td colspan="7" class="text-center">Não há registros</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

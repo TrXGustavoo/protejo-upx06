@@ -14,8 +14,9 @@ export class EditarGestorComponent implements OnInit {
     data_nascimento: '',
     email: '',
     senha: '',
-    username: '',
-    empresa: ''
+    setor: '',
+    empresa_id: 0,
+    nome_empresa: ''
   };
 
   constructor(
@@ -29,15 +30,25 @@ export class EditarGestorComponent implements OnInit {
   }
 
   buscarGestor() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.gestorService.buscarGestorPorId(id).subscribe(
+    const gestorId = Number(localStorage.getItem('userId'));
+    console.log('id:', gestorId);
+    this.gestorService.buscarGestorPorId(gestorId).subscribe(
       (gestor) => {
-        this.gestor = gestor;
+        this.gestor = { ...gestor }; // Copiar as propriedades do gestor
+        this.gestor.data_nascimento = this.formatarData(gestor.data_nascimento); // Formatar a data
       },
       (error) => {
         console.error('Erro ao buscar gestor:', error);
       }
     );
+  }
+
+  formatarData(data: string): string {
+    const dataObj = new Date(data);
+    const ano = dataObj.getFullYear();
+    const mes = ('0' + (dataObj.getMonth() + 1)).slice(-2); // Adicionar zero à esquerda se necessário
+    const dia = ('0' + dataObj.getDate()).slice(-2); // Adicionar zero à esquerda se necessário
+    return `${ano}-${mes}-${dia}`;
   }
 
   editar() {

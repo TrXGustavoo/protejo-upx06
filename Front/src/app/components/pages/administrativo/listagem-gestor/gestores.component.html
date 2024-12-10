@@ -34,13 +34,13 @@
                 <input class="form-control filter" placeholder="Filtrar Nome" [(ngModel)]="filter.nome_completo" name="nome_completo" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Username" [(ngModel)]="filter.username" name="username" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Setor" [(ngModel)]="filter.setor" name="setor" (input)="applyFilters()">
               </th>
               <th>
                 <input class="form-control filter" placeholder="Filtrar E-mail" [(ngModel)]="filter.email" name="email" (input)="applyFilters()">
               </th>
               <th>
-                <input class="form-control filter" placeholder="Filtrar Empresa" [(ngModel)]="filter.empresa" name="empresa" (input)="applyFilters()">
+                <input class="form-control filter" placeholder="Filtrar Empresa" [(ngModel)]="filter.empresa_id" name="empresa_id" (input)="applyFilters()">
               </th>
             </tr>
           </thead>
@@ -56,9 +56,9 @@
                 </button>
               </td>
               <td>{{ gestor.nome_completo }}</td>
-              <td>{{ gestor.username }}</td>
+              <td>{{ gestor.setor }}</td>
               <td>{{ gestor.email }}</td>
-              <td>{{ gestor.empresa }}</td> 
+              <td>{{ gestor.nome_empresa }}</td>  
             </tr>
 
             <tr *ngIf="filteredGestores.length === 0">

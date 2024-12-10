@@ -11,6 +11,12 @@ import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.compo
 import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SharedComponent } from './components/shared/shared.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AprendizGuard } from './guards/aprendiz.guard';
+import { GestorGuard } from './guards/gestor.guard';
+import { PerfilGestorComponent } from './components/pages/gestor/perfil-gestor/perfil-gestor.component';
+import { LoginEmpresaComponent } from './components/pages/login-empresa/login-empresa.component';
+import { PerfilEmpresaComponent } from './components/pages/empresa/perfil-empresa/perfil-empresa.component';
 
 
 const routes: Routes = [
@@ -20,15 +26,20 @@ const routes: Routes = [
     path: '',
     component: SharedComponent,
     children: [
-      { path: 'aprendiz', component: AprendizComponent },
-      { path: 'gestores', component: GestoresComponent },
+      { path: 'aprendiz', component: AprendizComponent, canActivate: [AuthGuard] },
+      { path: 'gestores', component: GestoresComponent, canActivate: [AuthGuard]},
       { path: 'cadastro-aprendiz', component: CadastroAprendizComponent },
       { path: 'cadastro-gestor', component: CadastroGestorComponent },
       { path: 'editar-aprendiz/:id', component: EditarAprendizComponent },
-      { path: 'editar-gestor/:id', component: EditarGestorComponent }
+      { path: 'editar-gestor/:id', component: EditarGestorComponent,  canActivate: [AuthGuard] },
+      { path: 'perfil-aprendiz/:id', component: PerfilComponent}, 
+      { path: 'perfil-gestor', component: PerfilGestorComponent}, 
+      { path: 'login-empresa', component: LoginEmpresaComponent }, 
+      { path: 'perfil-empresa/:id', component: PerfilEmpresaComponent},
+
     ]
   },
-  { path: 'perfil-aprendiz', component: PerfilComponent }, 
+  
   { path: 'cadastro-atividade', component: CadastroAtividadeComponent } 
 ];
 

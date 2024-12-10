@@ -14,8 +14,9 @@ export class EditarAprendizComponent implements OnInit {
     data_nascimento: '',
     email: '',
     senha: '',
-    username: '',
-    ativo: false
+    curso: '',
+    ativo: false,
+    nome_empresa: null
   };
 
   constructor(

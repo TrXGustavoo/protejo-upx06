@@ -20,6 +20,9 @@ import { PerfilComponent } from './components/pages/aprendiz/perfil/perfil.compo
 import { CadastroAtividadeComponent } from './components/pages/aprendiz/cadastro-atividade/cadastro-atividade.component';
 import { SharedComponent } from './components/shared/shared.component';
 import { EditarGestorComponent } from './components/pages/administrativo/editar-gestor/editar-gestor.component';
+import { PerfilGestorComponent } from './components/pages/gestor/perfil-gestor/perfil-gestor.component';
+import { LoginEmpresaComponent } from './components/pages/login-empresa/login-empresa.component';
+import { PerfilEmpresaComponent } from './components/pages/empresa/perfil-empresa/perfil-empresa.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { EditarGestorComponent } from './components/pages/administrativo/editar-
     PerfilComponent,
     CadastroAtividadeComponent,
     SharedComponent,
-    EditarGestorComponent
+    EditarGestorComponent,
+    PerfilGestorComponent,
+    LoginEmpresaComponent,
+    PerfilEmpresaComponent
   ],
   imports: [
     BrowserModule,
